@@ -17,38 +17,31 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-let userId = 0;
 let i = 0;
+let userId = i;
 
 // 데이터 쓰기
 const CreateUser = (userName, userPhone) => {
   const userListRef = firebase.database().ref('User');
-  const newUserRef = userListRef.child('User' + i);
+  const newUserRef = userListRef.child('User' + userId);
   
   newUserRef.set({
     userId: userId,
     userName: userName,
     userPhone: userPhone
   });
-  userId++;
   i++;
+  return userId;
 }
 
-// const UpdateUser = (userName, userPhone) => {
-  //   firebase.database().ref('User').update({
-    //     userId: userId,
-    //     userName: userName,
-    //     userPhone: userPhone
-    //   });
-    // }
-    
-    // 숫자 버튼 클릭시 업데이트
-  const UpdateNum = (num) => {
-      i = 0;
-      firebase.database().ref('User').child('User' + i).update({
-    currentNum: num
+
+// 숫자 버튼 클릭시 업데이트
+const UpdateNum = (num) => {
+  firebase.database().ref('User').child('User' +   ).update({
+  count: num
   });
 }
+
 
 
 // 필요한 곳에서 사용할 수 있도록 내보내기
