@@ -1,4 +1,6 @@
+import $ from 'jquery';
 /*global $, document, window, setTimeout, navigator, console, location*/
+
 $(document).ready(function () {
     'use strict';
 
@@ -117,6 +119,6 @@ $(document).ready(function () {
 
     // Reload page
     $('a.profile').on('click', function () {
-        location.reload(true);
+        window.location.reload(true);
     });
 }); // document.onready

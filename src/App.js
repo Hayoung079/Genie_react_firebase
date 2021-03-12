@@ -1,15 +1,16 @@
 import Counter from './Counter';
 import User from './User';
 import './App.css';
+import './script/script'
 
 function App() {
   return (
-    <div>
+    <div className="App">
     <div id="root">
       <div className="container">
         <section id="formHolder">
-          <User />
           <Counter />
+          <User />
         </section>
       </div> 
     </div>
