@@ -17,8 +17,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-let i = 0;
-let userId = i;
+let userId = 0;
 
 // 데이터 쓰기
 const CreateUser = (userName, userPhone) => {
@@ -30,14 +29,13 @@ const CreateUser = (userName, userPhone) => {
     userName: userName,
     userPhone: userPhone
   });
-  i++;
-  return userId;
+  userId++;
 }
 
 
 // 숫자 버튼 클릭시 업데이트
 const UpdateNum = (num) => {
-  firebase.database().ref('User').child('User' +   ).update({
+  firebase.database().ref('User').child('User' + (userId-1) ).update({
   count: num
   });
 }
