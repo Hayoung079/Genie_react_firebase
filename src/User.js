@@ -3,8 +3,6 @@ import { CreateUser } from './Firebase';
 import './App.css';
 import './script/script';
 
-var  agreementError = true;
-
 const User =() => {
     
     // name, phone useState선언
