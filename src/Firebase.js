@@ -1,6 +1,7 @@
 import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
+import uuid from "react-uuid";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -17,12 +18,34 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-let userId = window.localStorage.getItem("userId")
-
-// 초기설정
-if(!userId) { // 키값이 없으면
-  window.localStorage.setItem("userId", 0);
+// 1~ 1000 까지 난수 생성 
+const usernumber = [];
+const random = () => {
+  let ranNum = Math.floor(Math.random()*100);
+  if(!sameNum(ranNum)) {
+    usernumber.push(ranNum);
+    window.sessionStorage.setItem("userId", ranNum);
+  }
+  
 }
+
+// 중복 검사
+const sameNum = (ranNum) => {
+  for (let i=0; i <usernumber.length; i++) {
+    if(ranNum === usernumber[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+random();
+
+
+//uuid 활용
+//window.sessionStorage.setItem("userId", uuid());
+
+let userId = window.sessionStorage.getItem("userId")
 
 // 데이터 쓰기
 const CreateUser = (userName, userPhone) => {
@@ -30,19 +53,16 @@ const CreateUser = (userName, userPhone) => {
   const newUserRef = userListRef.child('User' + userId);
   
   newUserRef.set({
-    userId: parseInt(userId),
+    // userId: JSON.parse(userId),
     userName: userName,
     userPhone: userPhone
   });
-  userId++;
-  window.localStorage.setItem("userId", userId);
-  return userId;
 }
 
 
 // 숫자 버튼 클릭시 업데이트
 const UpdateNum = (num) => {
-  firebase.database().ref('User').child('User' + (userId-1) ).update({
+  firebase.database().ref('User').child('User' + userId ).update({
   count: num
   });
 }
