@@ -17,11 +17,11 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-let userId = sessionStorage.getItem("userId")
+let userId = window.localStorage.getItem("userId")
 
 // 초기설정
 if(!userId) { // 키값이 없으면
-  sessionStorage.setItem("userId", 0);
+  window.localStorage.setItem("userId", 0);
 }
 
 // 데이터 쓰기
@@ -35,7 +35,7 @@ const CreateUser = (userName, userPhone) => {
     userPhone: userPhone
   });
   userId++;
-  sessionStorage.setItem("userId", userId);
+  window.localStorage.setItem("userId", userId);
   return userId;
 }
 
