@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CreateUser } from './Firebase';
+import { ReadUser } from './Firebase';
 import './App.css';
 import './script/script';
 
@@ -27,10 +27,7 @@ const User =() => {
     
     // submit 함수 
     const handleSubmit = (e) => {
-        if(name !== "" && phone !== "" && checked === true) { 
-            CreateUser(name, phone); // 파이어베이스에 저장
-            e.preventDefault(); // 새로고침 안 되도록
-        }
+        ReadUser(name, phone);
     }
 
     const TOS =" Lor ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse scelerisque feugiat vehicula. Pellentesque leo risus, convallis quis felis a, venenatis consequat ex. Cras at porttitor lacus. Sed quis lorem lacinia, commodo sem eget, bibendum magna. Integer vel orci augue. Sed nec ex eu velit elementum rutrum eu congue metus. Quisque sollicitudin, nibh eget sodales accumsan, nisl ex dictum libero, a egestas purus purus tincidunt justo. Suspendisse lacinia lacus in massa tempor iaculis. Donec sit amet magna sed tortor congue auctor. Vivamus malesuada arcu ex, non tincidunt dolor vehicula at. Morbi porta ligula tristique, convallis massa in, placerat leo. Etiam vehicula egestas volutpat. Phasellus condimentum eleifend elit, vel pretium enim. Morbi posuere dolor metus, ac consectetur leo pulvinar vel. Donec in dui et augue tempor vehicula eget vitae ante. Etiam lobortis ex purus, at laoreet nibh pellentesque et. Vivamus magna est, pellentesque a ipsum in, efficitur convallis lectus. Nulla vitae euismod urna. Integer pharetra turpis vel consectetur accumsan. Nullam aliquam placerat consectetur. Sed elementum eros a hendrerit varius.";
