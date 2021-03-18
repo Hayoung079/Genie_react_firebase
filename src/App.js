@@ -1,7 +1,10 @@
 import Counter from './Counter';
 import User from './User';
 import './App.css';
-import './script/script'
+import './script/script';
+import config from './config';
+
+fetch(`${config.api}/position`)
 
 function App() {
   return (

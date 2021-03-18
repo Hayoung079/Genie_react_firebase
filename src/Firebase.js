@@ -35,7 +35,7 @@ const random = () => {
   
   back:
   while(true){
-    let ranNum = Math.floor(Math.random()*20+1); //1~10까지 숫자
+    let ranNum = Math.floor(Math.random()*20+1); //1~20까지 숫자
   
     if(number.indexOf(ranNum) === -1){ // 중복숫자가 없으면
       number.push(ranNum);
