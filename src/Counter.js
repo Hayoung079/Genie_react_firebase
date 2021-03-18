@@ -1,16 +1,26 @@
 import React, { useState } from "react";
-import { UpdateNum } from './Firebase';
+import { UpdateNum, UpdateNumLogin } from './Firebase';
 import './App.css';
 import './script/script';
 
+
+// 증가하는 함수
 const Counter = () => {
     //num useState선언
     const [num, setNum] = useState(0);
-    
-    // 증가하는 함수
-    const Plus = () => {    
-        setNum(num+1);
-        UpdateNum(num + 1); // 현재 수 데이터베이스에 쓰기
+
+    const Plus = () => {
+        const userId = window.sessionStorage.getItem('UserID');
+        const currentNum = JSON.parse(window.sessionStorage.getItem('CurrentCount'));
+        console.log(userId, currentNum);
+        
+        if(currentNum === 0) {
+            setNum(num+1);
+            UpdateNum(num + 1);  // 현재 수 데이터베이스에 쓰기
+        }else {
+            setNum(currentNum);
+            UpdateNumLogin(userId, (num+1));
+        }
     }
 
     return (
@@ -23,4 +33,4 @@ const Counter = () => {
     );
 }
 
-export default Counter;
+export { Counter };

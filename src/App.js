@@ -1,4 +1,4 @@
-import Counter from './Counter';
+import { Counter } from './Counter';
 import User from './User';
 import './App.css';
 import './script/script';
