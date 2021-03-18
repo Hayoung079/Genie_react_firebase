@@ -6,7 +6,7 @@ import './script/script';
 
 // 증가하는 함수
 const Counter = () => {
-    //num useState선언
+    //num useState
     const [num, setNum] = useState(0);
 
     const Plus = () => {
@@ -14,11 +14,11 @@ const Counter = () => {
         const currentNum = JSON.parse(window.sessionStorage.getItem('CurrentCount'));
         console.log(userId, currentNum);
         
-        if(currentNum === 0) {
+        if(currentNum === 0) { // 새로운 회원
             setNum(num+1);
-            UpdateNum(num + 1);  // 현재 수 데이터베이스에 쓰기
-        }else {
-            setNum(currentNum);
+            UpdateNum(num + 1);  // 데이터 베이스에 쓰기
+        }else if(currentNum > 0) { // 기존 회원
+            setNum(currentNum);  
             UpdateNumLogin(userId, (num+1));
         }
     }
@@ -33,4 +33,4 @@ const Counter = () => {
     );
 }
 
-export { Counter };
+export default Counter ;

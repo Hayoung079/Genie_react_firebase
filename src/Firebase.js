@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
-import { Counter } from './Counter';
+import  Counter  from './Counter';
 // import uuid from "react-uuid";
 //uuid 활용
 //window.sessionStorage.setItem("userId", uuid());
