@@ -22,12 +22,12 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 let number = []; // 숫자를 넣어 중복을 확인할 배열
-let output = window.localStorage.getItem("ranNum");
+let localNum = window.localStorage.getItem("ranNum");
   
-if(!output){
+if(!localNum){
   window.localStorage.setItem("ranNum", JSON.stringify(number));
 }else{
-  number = JSON.parse(output);
+  number = JSON.parse(localNum);
 }
 
 // userId 중복없이 랜덤숫자 생성 
@@ -39,7 +39,7 @@ const random = () => {
   
     if(number.indexOf(ranNum) === -1){ // 중복숫자가 없으면
       number.push(ranNum);
-      window.localStorage.setItem("ranNum", JSON.stringify(number)); // 숫자배열 로컬스토리지에 저장
+      window.localStorage.setItem("ranNum", JSON.stringify(number)); // 로컬스토리지에 숫자배열 저장
       window.sessionStorage.setItem("userId", ranNum); // 랜덤 숫자 세션스토리지 저장
       break;
     }else{ // 있으면 다시 숫자 뽑기
@@ -76,13 +76,16 @@ const UpdateNum = (num) => {
 const ReadUser = (userName, userPhone) => { //휴대폰 번호로 판단
   random();
 
-  const rootRef = firebase.database().ref()
-  rootRef.child('Users').orderByChild('userPhone').equalTo(userPhone).on("value", function(snapshot){
+  const phoneRef = firebase.database().ref('Users').orderByChild('userPhone').equalTo(userPhone);
+  phoneRef.once("value", function(snapshot){
     if (snapshot.exists()){
       console.log("exists!");
-      console.log(snapshot.val())
+      console.log(snapshot.val());
       alert("이미 가입했습니다.");
       window.location.reload(); // 새로고침
+      // localStorage에 배열 마지막 값 삭제하기
+      number.pop();
+      window.localStorage.setItem("ranNum", JSON.stringify(number));
     }else{
       console.log("not exists!");
       CreateUser(userName, userPhone)
