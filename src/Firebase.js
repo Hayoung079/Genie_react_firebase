@@ -1,7 +1,6 @@
 import firebase from "firebase";
 import "firebase/auth";
 import "firebase/firestore";
-import  Counter  from './Counter';
 // import uuid from "react-uuid";
 //uuid 활용
 //window.sessionStorage.setItem("userId", uuid());
@@ -36,7 +35,7 @@ if(!localNum){
 const random = () => {   
   back:
   while(true){
-    let ranNum = Math.floor(Math.random()*20+1); //1~20까지 숫자
+    let ranNum = Math.floor(Math.random()*100+1); //1~100까지 숫자
   
     if(number.indexOf(ranNum) === -1){ // 중복숫자가 없으면
       number.push(ranNum);
