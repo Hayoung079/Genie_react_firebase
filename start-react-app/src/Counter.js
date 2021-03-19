@@ -12,7 +12,7 @@ const Counter = () => {
     const Plus = () => {
         const userId = window.sessionStorage.getItem('UserID');
         const currentNum = JSON.parse(window.sessionStorage.getItem('CurrentCount'));
-        console.log(userId, currentNum);
+        console.log("Current :" + userId, currentNum);
         
         if(currentNum === 0) { // 새로운 회원
             setNum(num+1);

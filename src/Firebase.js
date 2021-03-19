@@ -22,6 +22,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// 랜덤 숫자(userId)
 let number = []; // 숫자를 넣어 중복을 확인할 배열
 let localNum = window.localStorage.getItem("ranNum");
   
@@ -33,7 +34,6 @@ if(!localNum){
 
 // userId 중복없이 랜덤숫자 생성 
 const random = () => {   
-  
   back:
   while(true){
     let ranNum = Math.floor(Math.random()*20+1); //1~20까지 숫자
@@ -64,18 +64,18 @@ const CreateUser = (userName, userPhone) => {
 }
 
 
-// 숫자 버튼 클릭시 업데이트
+// 숫자 버튼 클릭시 
 const UpdateNum = (num) => {
   const userIdArr = JSON.parse(window.localStorage.getItem("ranNum")) ;
   const userId = userIdArr[userIdArr.length-1];
-  console.log(userId)
+
   firebase.database().ref('Users').child('User' + userId ).update({
     count: num
   });
 }
 
+// 기존 회원 버튼 클릭시
 const UpdateNumLogin = (userId ,num) => {
-  console.log(userId)
   firebase.database().ref('Users').child('User' + userId ).update({
     count: num
   });
@@ -89,30 +89,28 @@ const ReadUser = (userName, userPhone) => { //휴대폰 번호로 판단
   const phoneRef = firebase.database().ref('Users').orderByChild('userPhone').equalTo(userPhone);
   phoneRef.once("value", function(snapshot){
     if (snapshot.exists()){
-      console.log("exists!");
+      console.log("이미 가입한 회원 로그인")
+      
       // localStorage에 배열 마지막 값 삭제하기
       number.pop();
       window.localStorage.setItem("ranNum", JSON.stringify(number));
-      alert("가입한 회원")
       
-      // 일치하는 노드에 (userId) count++ 하기
+      // 일치하는 노드의 count, userid 추출
       const userIdObj= snapshot.val()[Object.keys(snapshot.val())[0]];
       const userCount = userIdObj[Object.keys(userIdObj)[0]];
       const userId = userIdObj[Object.keys(userIdObj)[1]];
-      console.log(userId, userCount);
-      
+
+      // 세션에 저장 -- 카운트 + 용도
       window.sessionStorage.setItem("UserID", userId);
       window.sessionStorage.setItem("CurrentCount", userCount);
-      Counter();
-      
     }else{
-      console.log("not exists!");
+      console.log("신규 회원 가입");
       CreateUser(userName, userPhone);
       window.sessionStorage.setItem("CurrentCount", 0);
-      Counter();
     }
   });
 }
+
 
 
 // 필요한 곳에서 사용할 수 있도록 내보내기

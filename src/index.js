@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import './script/script';
+import Counter from './Counter';
+import User from './User';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Counter />
+    <User />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('formHolder')
 );
 
 // If you want to start measuring performance in your app, pass a function

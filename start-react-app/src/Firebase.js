@@ -99,7 +99,7 @@ const ReadUser = (userName, userPhone) => { //휴대폰 번호로 판단
       const userIdObj= snapshot.val()[Object.keys(snapshot.val())[0]];
       const userCount = userIdObj[Object.keys(userIdObj)[0]];
       const userId = userIdObj[Object.keys(userIdObj)[1]];
-      console.log(userId, userCount);
+      console.log("Local :"+ userId, userCount);
       
       window.sessionStorage.setItem("UserID", userId);
       window.sessionStorage.setItem("CurrentCount", userCount);

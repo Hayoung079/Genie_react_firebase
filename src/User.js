@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ReadUser } from './Firebase';
-import './App.css';
-import './script/script';
+// import './App.css';
+// import './script/script';
 
 const User =() => {
     
